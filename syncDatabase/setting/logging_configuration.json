@@ -1,0 +1,80 @@
+{
+     "version": 1,
+     "disable_existing_loggers": false,
+     "formatters":{
+        "simple": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - message: %(message)s"
+        },
+        "error": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - p%(process)s {%(pathname)s:%(lineno)d} - message: %(message)s"
+        }
+     },
+     "handlers": {
+        "cache_handler": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "simple",
+            "filename": "log/syncCache.log",
+            "maxBytes": 52428800,
+            "backupCount": 2,
+            "encoding": "utf8"
+        },
+        "cache_error_handler": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "ERROR",
+            "formatter": "error",
+            "filename": "log/syncCache-error.log",
+            "maxBytes": 52428800,
+            "backupCount": 2,
+            "encoding": "utf8"
+        },
+        "jobparam_handler": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "INFO",
+            "formatter": "simple",
+            "filename": "log/syncJobParam.log",
+            "maxBytes": 52428800,
+            "backupCount": 2,
+            "encoding": "utf8"
+        },
+        "job_param_error_handler": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "ERROR",
+            "formatter": "error",
+            "filename": "log/syncJobParam.log",
+            "maxBytes": 52428800,
+            "backupCount": 2,
+            "encoding": "utf8"
+        },
+        "data_error_handler":{
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "ERROR",
+            "formatter": "error",
+            "filename": "log/database-error.log",
+            "maxBytes": 52428800,
+            "backupCount": 2,
+            "encoding": "utf8"
+        }
+     },
+     "root": {
+        "level": "WARNING",
+        "handlers": []
+     },
+     "loggers": {
+        "Job_Param": {
+          "handlers": ["jobparam_handler"]
+        },
+        "Error_Job_Param": {
+          "handlers": ["job_param_error_handler"]
+        },
+        "Sync_Data": {
+          "handlers": ["cache_handler"]
+        },
+        "Error_Sync_Data": {
+          "handlers": ["cache_error_handler"]
+        },
+        "Error_Data":{
+            "handlers": ["data_error_handler"]
+        }
+     }
+}
